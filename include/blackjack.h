@@ -6,6 +6,10 @@ extern "C" {
 
 #include <stdbool.h>
 
+/** \addtogroup Card
+ *  @{
+ */
+
 /**
  * Standard Suit for a deck of cards
  * @author Darrell Fuller
@@ -104,6 +108,52 @@ bool card_equals(Card *card, void *obj);
  * @param [in] card to check
  */
 char* card_tostring(Card *card);
+
+/** @}*/  /* END addtogroup Card */
+
+/** \addtogroup Card
+ *  @{
+ */
+
+/**
+ * Simple structure for a Deck of Cards (i.e. LinkedList)
+ */
+struct Node {
+	/** Card in Deck */
+    Card* card;
+    /** Next card (node) in Deck */
+    struct Node* next;
+};
+
+/** Deck Friendly name */
+typedef struct Node Deck;
+
+/**
+ * Create a Deck of Cards
+ * @returns deck of cards
+ */
+Deck* deck_create();
+
+/**
+ * Dispose of the Deck
+ * @param[in] deck to displose of
+ */
+void deck_free(Deck* deck);
+
+/**
+ * Number of cards in the deck
+ * @param[in] deck of cards
+ */
+int deck_size(Deck* deck);
+
+/** @}*/  /* END addtogroup Card */
+
+/**
+ * Deal a single card from the deck
+ * @param[in] deck to pull card from
+ */
+Card* deck_deal(Deck* deck);
+
 
 #ifdef __cplusplus
 }

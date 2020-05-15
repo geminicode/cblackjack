@@ -2,12 +2,40 @@
 #include "gtest/gtest.h"
 #include "blackjack.h"
 
-TEST(CardTest,SpadeIsASpade){
-    enum Suit spade;
-    spade = Spade;
-    EXPECT_EQ(1,spade);
+TEST(DeckTest,DeckCreate){
+    Deck *deck = deck_create();
+
+    EXPECT_TRUE(deck != NULL);
+
+    deck_free(deck);
 }
 
+TEST(DeckTest,DeckSize){
+    Deck *deck = deck_create();
+    EXPECT_TRUE(deck != NULL);
+
+    int size = deck_size(deck);
+    EXPECT_EQ(size, 56);
+
+    deck_free(deck);
+}
+
+TEST(DeckTest,DealCheck){
+    Deck *deck = deck_create();
+    EXPECT_TRUE(deck != NULL);
+
+    int size = deck_size(deck);
+    EXPECT_EQ(size, 56);
+
+    Card *card = deck_deal(deck);
+
+    size = deck_size(deck);
+    EXPECT_EQ(size, 55);
+
+    deck_free(deck);
+}
+
+/*
 TEST(CardTest,JackIsATen){
     Card* card = card_create(Heart, Jack);
     Card* card2 = card_create(Heart, Ten);
@@ -41,3 +69,4 @@ TEST(CardTest,JackIsAJack){
 
     EXPECT_TRUE(success);
 }
+*/
