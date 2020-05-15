@@ -10,4 +10,7 @@ LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/lib)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include)
     
 add_subdirectory (src)
+
+enable_testing()
+
 add_subdirectory (test)

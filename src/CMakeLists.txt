@@ -1,8 +1,9 @@
-# target_include_directories (Hello PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+file(GLOB SOURCE_FILES "*.c")
 
-# Add main.cpp file of project root directory as source file
-set(SOURCE_FILES card.c)
-#file(GLOB SOURCE_FILES *.c)
+message(${SOURCE_FILES})
+
+## list REMOVE_ITEM Does not work
+list(REMOVE_ITEM ${SOURCE_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
 
 add_library(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
 

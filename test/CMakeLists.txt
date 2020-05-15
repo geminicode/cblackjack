@@ -1,11 +1,14 @@
-enable_testing()
-
 include_directories(include)
 
 file(GLOB SOURCE_FILES *.cpp)
 
-add_executable(unit_tests ${SOURCE_FILES} )
+foreach(TESTSOURCE ${SOURCE_FILES})
 
-target_link_libraries(unit_tests gtest gmock gtest_main ${CMAKE_PROJECT_NAME})
+    get_filename_component(TESTEXE ${TESTSOURCE} NAME_WE)
+	add_executable(${TESTEXE} ${TESTSOURCE} )
 
-add_test(NAME unit COMMAND ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}/unit_tests)
+	target_link_libraries(${TESTEXE} gtest gmock gtest_main ${CMAKE_PROJECT_NAME})
+
+	add_test(${TESTEXE} COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TESTEXE})
+
+endforeach()
