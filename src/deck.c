@@ -49,37 +49,33 @@ int deck_size(Deck* deck)
 {
 	int size = 0;
 
-	if (deck == NULL)
-		return size;
-
-	while(deck->next != NULL) {
+	struct Node *head = deck;
+	
+	while(head)
+	{
 		size++;
-		deck = deck->next;
+		head = head->next;	
 	}
-
-	//size++;
+	
 	return size;
 }
 
-Card* deck_deal(Deck* deck)
+Card* deck_deal(Deck** deck)
 {
 	Card *card = NULL;
 
-	if (deck == NULL)
+	if (*deck == NULL)
 		return NULL;
 
-	struct Node *previous = deck;
+	struct Node *head = *deck;
 
-	while(deck->next != NULL) {
-		previous = deck;
-		deck = deck->next;
-	}
+	card = card_create(head->card->suit, head->card->face);
 
-	card = card_create(deck->card->suit, deck->card->face);
-
-	card_free(deck->card);
-    free(previous->next);
-	//previous->next = NULL;
+	
+  (*deck) = (*deck)->next;	
+  
+	card_free(head->card);
+  free(head);
 
 	return card;
 }

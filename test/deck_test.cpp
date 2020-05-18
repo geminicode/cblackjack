@@ -27,7 +27,7 @@ TEST(DeckTest,DealCheck){
     int size = deck_size(deck);
     EXPECT_EQ(size, 56);
 
-    Card *card = deck_deal(deck);
+    Card *card = deck_deal(&deck);
 
     size = deck_size(deck);
     EXPECT_EQ(size, 55);
