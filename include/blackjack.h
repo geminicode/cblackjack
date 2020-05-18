@@ -152,7 +152,7 @@ int deck_size(Deck* deck);
  * Deal a single card from the deck
  * @param[in] deck to pull card from
  */
-Card* deck_deal(Deck* deck);
+Card* deck_deal(Deck** deck);
 
 
 #ifdef __cplusplus
