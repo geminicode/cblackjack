@@ -23,6 +23,7 @@ Deck* deck_create()
 				return NULL;
 			}
 			current = current->next;
+			current->next = NULL;  // Make sure next is NULL
 		}
 	}
 
@@ -53,8 +54,9 @@ int deck_size(Deck* deck)
 	
 	while(head)
 	{
-		size++;
-		head = head->next;	
+		head = head->next;
+		if (head)
+			size++;
 	}
 	
 	return size;
@@ -72,10 +74,10 @@ Card* deck_deal(Deck** deck)
 	card = card_create(head->card->suit, head->card->face);
 
 	
-  (*deck) = (*deck)->next;	
+    (*deck) = (*deck)->next;
   
-	card_free(head->card);
-  free(head);
+    card_free(head->card);
+    free(head);
 
 	return card;
 }

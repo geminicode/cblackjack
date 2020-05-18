@@ -7,8 +7,8 @@ foreach(TESTSOURCE ${SOURCE_FILES})
     get_filename_component(TESTEXE ${TESTSOURCE} NAME_WE)
 	add_executable(${TESTEXE} ${TESTSOURCE} )
 
-	target_link_libraries(${TESTEXE} gtest gmock gtest_main ${CMAKE_PROJECT_NAME})
+	target_link_libraries(${TESTEXE} gtest gmock gtest_main pthread ${CMAKE_PROJECT_NAME})
 
-	add_test(${TESTEXE} COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TESTEXE})
+	add_test(NAME ${TESTEXE} COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TESTEXE})
 
 endforeach()

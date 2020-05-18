@@ -2,8 +2,7 @@ file(GLOB SOURCE_FILES "*.c")
 
 message(${SOURCE_FILES})
 
-## list REMOVE_ITEM Does not work
-list(REMOVE_ITEM ${SOURCE_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
+list(REMOVE_ITEM SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/main.c)
 
 add_library(${CMAKE_PROJECT_NAME} ${SOURCE_FILES})
 
