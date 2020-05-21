@@ -29,7 +29,7 @@ enum Suit {
  */
 enum Face {
 	One,
-	Two, 
+	Two,
 	Three,
 	Four,
 	Five,
@@ -146,14 +146,62 @@ void deck_free(Deck* deck);
  */
 int deck_size(Deck* deck);
 
-/** @}*/  /* END addtogroup Card */
-
 /**
  * Deal a single card from the deck
  * @param[in] deck to pull card from
  */
 Card* deck_deal(Deck** deck);
 
+/** @}*/  /* END addtogroup Card */
+
+
+/** \addtogroup Player
+ *  @{
+ */
+
+ /** Player's Hand Friendly name */
+ typedef struct Node Hand;
+
+ /**
+  * Simple structure for a Deck of Cards (i.e. LinkedList)
+  */
+ typedef struct _Player {
+ 		/** Player's Hand */
+     Hand* hand;
+     /** Next card (node) in Deck */
+     char name[10];
+ } Player;
+
+/**
+* Create a new player.
+* @param[in] name of player
+* @return player that was created
+*/
+Player* player_create(char *name);
+
+/**
+* Dispose of a player.
+* @param[in] player to dispose of
+*/
+void player_free(Player* player);
+
+/**
+* Deal a player a single card.
+* @param[in] player to deal to
+* @param[in] card given to player
+* return player's hand Total
+* @see player_hand_value
+*/
+int player_hit(Player* player, Card* card);
+
+/**
+* Total the players hand and return the value.
+* @param[in] player to total hand
+* @return value of player's hand
+*/
+int player_hand_value(Player* player);
+
+ /** @}*/  /* END addtogroup Player */
 
 #ifdef __cplusplus
 }

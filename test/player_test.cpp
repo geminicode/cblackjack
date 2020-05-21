@@ -2,14 +2,27 @@
 #include "gtest/gtest.h"
 #include "blackjack.h"
 
-TEST(DeckTest,DeckCreate){
-    Deck *deck = deck_create();
+TEST(PlayerTest,PlayerCreate){
+    Player *player = player_create("Dealer");
 
-    EXPECT_TRUE(deck != NULL);
+    EXPECT_TRUE(player != NULL);
 
-    deck_free(deck);
+    player_free(player);
 }
 
+TEST(PlayerTest,PlayerHit){
+    Player *player = player_create("Dealer");
+    Card* card = card_create(Heart, Jack);
+
+    int value = player_hit(player, card);
+
+    EXPECT_TRUE(player != NULL);
+    EXPECT_EQ(value, 10);
+
+    player_free(player);
+    card_free(card);
+}
+/*
 TEST(DeckTest,DeckSize){
     Deck *deck = deck_create();
     EXPECT_TRUE(deck != NULL);
@@ -34,3 +47,4 @@ TEST(DeckTest,DealCheck){
 
     deck_free(deck);
 }
+*/
