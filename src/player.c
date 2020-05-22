@@ -30,6 +30,7 @@ void player_free(Player* player)
 
 int player_hit(Player* player, Card* card)
 {
+    int hand_value = 0;
     if (player == NULL || card == NULL)
         return -1;
 
@@ -54,8 +55,9 @@ int player_hit(Player* player, Card* card)
         current->next = head;
         player->hand = current;
     }
+    hand_value = player_hand_value(player);
 
-    return player_hand_value(player);
+    return hand_value;
 }
 
 int player_hand_value(Player* player)
@@ -72,9 +74,11 @@ int player_hand_value(Player* player)
 
   	while(head)
   	{
-      if (head->card)
-        value+=head->card->value;
-  		head = head->next;
+        if (head->card)
+        {
+            value+=head->card->value;
+        }
+  	    head = head->next;
   	}
 
   	return value;

@@ -30,6 +30,7 @@ TEST(DeckTest,DealCheck){
     Card *card = deck_deal(&deck);
 
     size = deck_size(deck);
+    EXPECT_TRUE(card != NULL);
     EXPECT_EQ(size, 55);
 
     deck_free(deck);

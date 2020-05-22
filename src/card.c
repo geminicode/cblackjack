@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <wctype.h>
 #include "blackjack.h"
 
@@ -90,5 +91,8 @@ char* card_tostring(Card *card)
 		default:
 			break;
 	}
-	return printf("%d%d", card->value, s);
+
+	wprintf("%d%ls", card->value, s);
+
+	return NULL; 
 }

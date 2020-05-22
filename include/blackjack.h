@@ -51,7 +51,7 @@ enum Face {
  * @author Darrell Fuller
  *
  */
-typedef struct _Card {
+typedef struct Card {
 	/** Card Suit (Hearts, Club, etc.. */
 	enum Suit suit;
 	/** Card Face (Two, Jack, Ace, etc) */
@@ -111,7 +111,7 @@ char* card_tostring(Card *card);
 
 /** @}*/  /* END addtogroup Card */
 
-/** \addtogroup Card
+/** \addtogroup Deck
  *  @{
  */
 
@@ -152,7 +152,7 @@ int deck_size(Deck* deck);
  */
 Card* deck_deal(Deck** deck);
 
-/** @}*/  /* END addtogroup Card */
+/** @}*/  /* END addtogroup Deck */
 
 
 /** \addtogroup Player
@@ -165,7 +165,7 @@ Card* deck_deal(Deck** deck);
  /**
   * Simple structure for a Deck of Cards (i.e. LinkedList)
   */
- typedef struct _Player {
+ typedef struct Player {
  		/** Player's Hand */
      Hand* hand;
      /** Next card (node) in Deck */

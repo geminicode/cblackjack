@@ -43,7 +43,7 @@ void deck_free(Deck* deck)
 		current = current->next;
 		card_free(temp->card);
 		free(temp);
-	}while(current->next != NULL);
+	}while(current != NULL && current->next != NULL);
 }
 
 int deck_size(Deck* deck)

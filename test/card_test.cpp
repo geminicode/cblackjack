@@ -40,4 +40,6 @@ TEST(CardTest,JackIsAJack){
     bool success = card_equals(card, card2);
 
     EXPECT_TRUE(success);
+
+    EXPECT_TRUE(value1 == value2);
 }
