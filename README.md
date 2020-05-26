@@ -11,6 +11,35 @@
 * GCOV
 * LCOV
 
+## CMake
+
+```
+sulaco-mac:cblackjack darrell$ brew install doxygen
+==> Downloading https://homebrew.bintray.com/bottles/doxygen-1.8.18.high_sierra.bottle.tar.gz
+==> Downloading from https://akamai.bintray.com/63/630a2c57c428c9ae42d5d6f6f5986a08292db010c51f407c1bbb6224c4d9ddf7?__
+######################################################################## 100.0%
+==> Pouring doxygen-1.8.18.high_sierra.bottle.tar.gz  
+/usr/local/Cellar/doxygen/1.8.18: 11 files, 17.9MB
+sulaco-mac:cblackjack darrell$ which doxygen
+/usr/local/bin/doxygen
+```
+
+## Graphviz
+
+```
+sulaco-mac:cblackjack darrell$ brew install graphviz
+==> Downloading https://homebrew.bintray.com/bottles/libpng-1.6.37.high_sierra.bottle.tar.gz
+==> Downloading from https://akamai.bintray.com/bb/bbdd94bdd5954bc50c096391486e67265dce5631efb913dcffe4469806a242b6?__
+######################################################################## 100.0%
+...
+```
+
+## GCOV
+
+
+## LCOV
+
+
 
 # CMake
 

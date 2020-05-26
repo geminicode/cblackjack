@@ -30,6 +30,31 @@ TEST(CardTest,CreateCard){
     card_free(card);
 }
 
+TEST(CardTest,FaceCard){
+    Card* card = card_create(Heart, Two);
+    int f = card_face(card);
+    EXPECT_EQ(f,Two);
+    card_free(card);
+}
+
+TEST(CardTest,SuitCard){
+    Card* card = card_create(Heart, Two);
+    int s = card_suit(card);
+    EXPECT_EQ(s,Heart);
+    card_free(card);
+}
+
+TEST(CardTest,FreeCardNull){
+    Card* card = NULL;
+    card_free(card);
+}
+
+TEST(CardTest,ValueCardNull){
+    Card* card = NULL;
+    int answer = card_value(card);
+    EXPECT_EQ(answer,0);
+}
+
 TEST(CardTest,JackIsAJack){
     Card* card = card_create(Heart, Jack);
     Card* card2 = card_create(Heart, Jack);
@@ -42,4 +67,13 @@ TEST(CardTest,JackIsAJack){
     EXPECT_TRUE(success);
 
     EXPECT_TRUE(value1 == value2);
+}
+
+TEST(CardTest,JackIsANull){
+    Card* card = card_create(Heart, Jack);
+    Card* card2 = NULL;
+
+    bool success = card_equals(card, card2);
+
+    EXPECT_FALSE(success);
 }

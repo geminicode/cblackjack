@@ -203,6 +203,53 @@ int player_hand_value(Player* player);
 
  /** @}*/  /* END addtogroup Player */
 
+ /** \addtogroup BlackJack
+  *  @{
+  */
+
+	/**
+	 * Status of a Players Hand
+	 * @author Darrell Fuller
+	 */
+	enum HandStatus {
+		/** Player is playing the game */
+		Playing,
+		/** Player is playing the game */
+		Standing,
+		/** Player is holding his hand and current points */
+		BlackJack21,
+		/** Player has the highest possible hand */
+		Busted,
+		/** Player has won the game */
+		Winner
+	};
+
+	#define MAX_PLAYERS 5
+
+	// Commands
+	/** Quit Key Command  */
+	#define CMD_QUIT  'Q'
+	/** Hit Key Command  */
+	#define CMD_HIT 'H'
+	/** Stand Key Command  */
+	#define CMD_STAND 'S'
+
+	/** Dealer's name  */
+	#define  DEALER_NAME "Dealer"
+
+	/**
+   * Simple structure for the BlackJack Game
+   */
+  typedef struct BlackJack {
+  		/** Deck of Cards for Game */
+      Deck* deck;
+      /** Next card (node) in Deck */
+      Player *players[MAX_PLAYERS];
+			int playerStatus[MAX_PLAYERS];
+  } BlackJack;
+
+ /** @}*/  /* END addtogroup BlackJack */
+
 #ifdef __cplusplus
 }
 #endif  /* __cplusplus  */

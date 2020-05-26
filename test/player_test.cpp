@@ -2,11 +2,11 @@
 #include "gtest/gtest.h"
 #include "blackjack.h"
 
-//#define DEALER_NAME "Dealer"
-char DEALER_NAME[]="Dealer";
+//#define DEALER "Dealer"
+char DEALER[]=DEALER_NAME;
 
 TEST(PlayerTest,PlayerCreate){
-    Player *player = player_create(DEALER_NAME);
+    Player *player = player_create(DEALER);
 
     EXPECT_TRUE(player != NULL);
 
@@ -14,7 +14,7 @@ TEST(PlayerTest,PlayerCreate){
 }
 
 TEST(PlayerTest,PlayerHit){
-    Player *player = player_create(DEALER_NAME);
+    Player *player = player_create(DEALER);
     Card* card = card_create(Heart, Jack);
 
     int value = player_hit(player, card);
@@ -27,7 +27,7 @@ TEST(PlayerTest,PlayerHit){
 }
 
 TEST(PlayerTest,PlayerHitTwice){
-    Player *player = player_create(DEALER_NAME);
+    Player *player = player_create(DEALER);
 
     Deck *deck = deck_create();
     Card *card = deck_deal(&deck);
@@ -46,29 +46,3 @@ TEST(PlayerTest,PlayerHitTwice){
     card_free(card);
     card_free(card2);
 }
-/*
-TEST(DeckTest,DeckSize){
-    Deck *deck = deck_create();
-    EXPECT_TRUE(deck != NULL);
-
-    int size = deck_size(deck);
-    EXPECT_EQ(size, 56);
-
-    deck_free(deck);
-}
-
-TEST(DeckTest,DealCheck){
-    Deck *deck = deck_create();
-    EXPECT_TRUE(deck != NULL);
-
-    int size = deck_size(deck);
-    EXPECT_EQ(size, 56);
-
-    Card *card = deck_deal(&deck);
-
-    size = deck_size(deck);
-    EXPECT_EQ(size, 55);
-
-    deck_free(deck);
-}
-*/
