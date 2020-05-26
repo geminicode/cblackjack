@@ -248,6 +248,33 @@ int player_hand_value(Player* player);
 			int playerStatus[MAX_PLAYERS];
   } BlackJack;
 
+	/**
+	* Create the BlackJack Game.
+  * @return Game.
+	*/
+	BlackJack* blackjack_create();
+
+	/**
+	* Dispose of the BlackJack Game.
+  * @param Game to dispose of.
+	*/
+	void blackjack_free(BlackJack* game);
+
+	/**
+	 * Deal a single card to the specified player
+	 * @param player to deal cards to
+	 */
+	void blackjack_deal_card(BlackJack* game, Player* player);
+
+	/**
+	 * Deal a specified number of cards to a player
+	 * @param player to deal cards to
+	 * @param cards to deal out
+	 */
+	void blackjack_deal_cards(BlackJack* game, Player* player, int cards);
+
+
+
  /** @}*/  /* END addtogroup BlackJack */
 
 #ifdef __cplusplus

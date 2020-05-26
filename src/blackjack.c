@@ -4,95 +4,61 @@
 #include <wctype.h>
 #include "blackjack.h"
 
-Card* card_create(enum Suit suit, enum Face face)
+BlackJack* blackjack_create()
 {
-	Card *card = malloc( sizeof(Card) );
+	BlackJack *game = malloc( sizeof(BlackJack) );
 
-	if (card == NULL)
+	if (game == NULL)
 		return NULL;
 
-	card->suit = suit;
-	card->face = face;
+	game->deck = deck_create();
 
-	// Ordinal is zero based.
-	card->value = face+1;
-
-	// Face cards are ten
-	if ((face == Jack) || (face == Queen) || (face == King))
-		card->value = 10;
-
-	// Aces are high by default
-	if (face == Ace)
-		card->value = 11;
-
-	return card;
+	return game;
 }
 
-void card_free(Card* card)
+void blackjack_free(BlackJack* game)
 {
-	if (card == NULL)
+	if (game == NULL)
 		return;
 
-	free(card);
+	deck_free(game->deck);
+
+	free(game);
 }
 
-int card_value(Card *card)
+void blackjack_deal_card(BlackJack* game, Player* player)
 {
-	if (card == NULL)
-		return 0;
-	else
-		return card->value;
+	blackjack_deal_cards(game, player, 1);
 }
 
-int card_suit(Card *card)
+/**
+ * Deal a specified number of cards to a player
+ * @param player to deal cards to
+ * @param cards to deal out
+ */
+void blackjack_deal_cards(BlackJack* game, Player* player, int cards)
 {
-	if (card == NULL)
-		return 0;
-	else
-		return card->suit;
-}
-
-int card_face(Card *card)
-{
-	if (card == NULL)
-		return 0;
-	else
-		return card->face;
-}
-
-bool card_equals(Card *card, void *obj)
-{
-	if (obj == NULL)
-		return false;
-
-	//if (!(obj instanceof Card))
-	//	return false;
-
-	Card *other = (Card *) obj;
-	// Card is equal if Face and Suit match
-	return (card->face == other->face &&
-		card->suit == other->suit);
-}
-
-char* card_tostring(Card *card)
-{
-	wchar_t s = 0x2663;
-	switch (card->suit)
+	for (int i=0; i<cards; i++)
 	{
-		case Spade:
-			s = 0x2660;
-			break;
-		case Heart:
-			s = 0x2665;
-			break;
-		case Diamond:
-			s = 0x2666;
-			break;
-		default:
-			break;
+		Card* card = deck_deal(&(game->deck));
+		player_hit(player, card);
+		// card_free(card);
 	}
 
-	wprintf("%d%ls", card->value, s);
-
-	return NULL; 
+	int hand_value = player_hand_value(player);
+	if (hand_value >= 21)
+	{
+		if (hand_value == 21)
+		{
+			//playerStatus.put(player, HandStatus.BlackJack);
+		}
+		else
+		{
+			//playerStatus.put(player, HandStatus.Busted);
+		}
+	}
+	else
+	{
+		//playerStatus.put(player, HandStatus.Playing);
+	}
 }
