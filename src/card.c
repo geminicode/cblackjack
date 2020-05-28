@@ -77,29 +77,26 @@ bool card_equals(Card *card, void *obj)
 
 wchar_t* card_tostring(Card *card)
 {
-	int ARRAY_LENGTH = 10;
+	int ARRAY_LENGTH = 3;
 	wchar_t *buffer = malloc( sizeof(wchar_t) * ARRAY_LENGTH);
 	memset(buffer, '\0', sizeof(char) * ARRAY_LENGTH);
-	wchar_t s = 0x2663;
+	wchar_t *s = L"\u2663";
 	switch (card->suit)
 	{
 		case Spade:
-			s = 0x2660;
+			s = L"\u2660";
 			break;
 		case Heart:
-			s = 0x2665;
+			s = L"\u2665";
 			break;
 		case Diamond:
-			s = 0x2666;
+			s = L"\u2666";
 			break;
 		default:
 			break;
 	}
 
-	//wprintf("%d%ls", card->value, s);
-
 	swprintf(buffer, ARRAY_LENGTH, L"%d%ls", card->value, s);
-	wprintf(buffer);
 
 	return buffer;
 }

@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
 #include "blackjack.h"
 
 /**
@@ -14,18 +16,25 @@ void display_gui(BlackJack* game)
 	for(int i=0; i < game->num_players; i++)
 	{
 		int hand_value = player_hand_value(game->players[i]);
-		printf("%s [%d]\n", game->players[i]->name, hand_value);
+		wprintf(L"%s [%d]", game->players[i]->name, hand_value);
+        struct Node *current = game->players[i]->hand;
 
-		//log(String.format("%s (%s) %s\n", (p.equals(currentPlayer))?"->":"..", playerStatus.get(p),  p.getHand()));
-
+        while(current)
+        {
+        	wchar_t *buffer = card_tostring(current->card);
+            current = current->next;
+            wprintf(L" %ls", buffer);
+        }
+		wprintf(L"\n");
 	}
-	printf("\n\n\n\nPlayer %s Turn: [H]it [S]tand [Q]uit : ", DEALER_NAME );
+	wprintf(L"\n\n\n\nPlayer %s Turn: [H]it [S]tand [Q]uit : ", DEALER_NAME );
 }
 
 
 int main(void)
 {
-	printf("Hello\r\n");
+	setlocale(LC_ALL, "en_US.utf-8");  // MUST BE HERE TO GET THE SYMBOLS
+	wprintf(L"Hello\r\n");
 
 	BlackJack* game = blackjack_create(3);
 
