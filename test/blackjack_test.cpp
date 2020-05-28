@@ -3,7 +3,7 @@
 #include "blackjack.h"
 
 TEST(BlackJackTest,GameCreate){
-    BlackJack *game = blackjack_create();
+    BlackJack *game = blackjack_create(1);
 
     EXPECT_TRUE(game != NULL);
 
@@ -12,7 +12,7 @@ TEST(BlackJackTest,GameCreate){
 
 
 TEST(BlackJackTest,DealCard){
-    BlackJack *game = blackjack_create();
+    BlackJack *game = blackjack_create(1);
     Player *player = player_create(DEALER_NAME);
 
     EXPECT_TRUE(game != NULL);
@@ -29,9 +29,27 @@ TEST(BlackJackTest,DealCard){
     player_free(player);
 }
 
+TEST(BlackJackTest,DealCards){
+    BlackJack *game = blackjack_create(1);
+    Player *player = player_create(DEALER_NAME);
+
+    EXPECT_TRUE(game != NULL);
+
+    int size = deck_size(game->deck);
+    EXPECT_EQ(size, 56);
+
+    blackjack_deal_cards(game, player, 2);
+
+    size = deck_size(game->deck);
+    EXPECT_EQ(size, 54);
+
+    blackjack_free(game);
+    player_free(player);
+}
+
 /*
 TEST(BlackJackTest,DealCheck){
-    BlackJack *game = blackjack_create();
+    BlackJack *game = blackjack_create(1);
     EXPECT_TRUE(game != NULL);
 
     int size = game_size(game);

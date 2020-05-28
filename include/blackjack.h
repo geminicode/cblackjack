@@ -60,7 +60,6 @@ typedef struct Card {
 	int value;
 } Card;
 
-
 /**
  * Create a single card with the supplied parameters
  * @param [in] suit of card
@@ -72,7 +71,7 @@ Card* card_create(enum Suit suit, enum Face face);
  * dispose of a card.
  * @param [in] card to dispose of
  */
-void card_free(Card* card);
+void card_free(Card *card);
 
 /**
  * Numerical value of Face of Card.
@@ -109,7 +108,7 @@ bool card_equals(Card *card, void *obj);
  */
 char* card_tostring(Card *card);
 
-/** @}*/  /* END addtogroup Card */
+/** @}*//* END addtogroup Card */
 
 /** \addtogroup Deck
  *  @{
@@ -120,9 +119,9 @@ char* card_tostring(Card *card);
  */
 struct Node {
 	/** Card in Deck */
-    Card* card;
-    /** Next card (node) in Deck */
-    struct Node* next;
+	Card *card;
+	/** Next card (node) in Deck */
+	struct Node *next;
 };
 
 /** Deck Friendly name */
@@ -138,144 +137,154 @@ Deck* deck_create();
  * Dispose of the Deck
  * @param[in] deck to displose of
  */
-void deck_free(Deck* deck);
+void deck_free(Deck *deck);
 
 /**
  * Number of cards in the deck
  * @param[in] deck of cards
  */
-int deck_size(Deck* deck);
+int deck_size(Deck *deck);
 
 /**
  * Deal a single card from the deck
  * @param[in] deck to pull card from
  */
-Card* deck_deal(Deck** deck);
+Card* deck_deal(Deck **deck);
 
-/** @}*/  /* END addtogroup Deck */
-
+/** @}*//* END addtogroup Deck */
 
 /** \addtogroup Player
  *  @{
  */
 
- /** Player's Hand Friendly name */
- typedef struct Node Hand;
-
- /**
-  * Simple structure for a Deck of Cards (i.e. LinkedList)
-  */
- typedef struct Player {
- 		/** Player's Hand */
-     Hand* hand;
-     /** Next card (node) in Deck */
-     char name[10];
- } Player;
+/** Player's Hand Friendly name */
+typedef struct Node Hand;
 
 /**
-* Create a new player.
-* @param[in] name of player
-* @return player that was created
-*/
+ * Simple structure for a Deck of Cards (i.e. LinkedList)
+ */
+typedef struct Player {
+	/** Player's Hand */
+	Hand *hand;
+	/** Next card (node) in Deck */
+	char name[10];
+} Player;
+
+/**
+ * Create a new player.
+ * @param[in] name of player
+ * @return player that was created
+ */
 Player* player_create(char *name);
 
 /**
-* Dispose of a player.
-* @param[in] player to dispose of
-*/
-void player_free(Player* player);
+ * Dispose of a player.
+ * @param[in] player to dispose of
+ */
+void player_free(Player *player);
 
 /**
-* Deal a player a single card.
-* @param[in] player to deal to
-* @param[in] card given to player
-* return player's hand Total
-* @see player_hand_value
-*/
-int player_hit(Player* player, Card* card);
+ * Deal a player a single card.
+ * @param[in] player to deal to
+ * @param[in] card given to player
+ * return player's hand Total
+ * @see player_hand_value
+ */
+int player_hit(Player *player, Card *card);
 
 /**
-* Total the players hand and return the value.
-* @param[in] player to total hand
-* @return value of player's hand
-*/
-int player_hand_value(Player* player);
+ * Total the players hand and return the value.
+ * @param[in] player to total hand
+ * @return value of player's hand
+ */
+int player_hand_value(Player *player);
 
- /** @}*/  /* END addtogroup Player */
+/** @}*//* END addtogroup Player */
 
- /** \addtogroup BlackJack
-  *  @{
-  */
+/** \addtogroup BlackJack
+ *  @{
+ */
 
-	/**
-	 * Status of a Players Hand
-	 * @author Darrell Fuller
-	 */
-	enum HandStatus {
-		/** Player is playing the game */
-		Playing,
-		/** Player is playing the game */
-		Standing,
-		/** Player is holding his hand and current points */
-		BlackJack21,
-		/** Player has the highest possible hand */
-		Busted,
-		/** Player has won the game */
-		Winner
-	};
+/**
+ * Status of a Players Hand
+ * @author Darrell Fuller
+ */
+enum HandStatus {
+	/** Player is playing the game */
+	Playing,
+	/** Player is playing the game */
+	Standing,
+	/** Player is holding his hand and current points */
+	BlackJack21,
+	/** Player has the highest possible hand */
+	Busted,
+	/** Player has won the game */
+	Winner
+};
 
-	#define MAX_PLAYERS 5
+#define MAX_PLAYERS 5
 
-	// Commands
-	/** Quit Key Command  */
-	#define CMD_QUIT  'Q'
-	/** Hit Key Command  */
-	#define CMD_HIT 'H'
-	/** Stand Key Command  */
-	#define CMD_STAND 'S'
+// Commands
+/** Quit Key Command  */
+#define CMD_QUIT  'Q'
+/** Hit Key Command  */
+#define CMD_HIT 'H'
+/** Stand Key Command  */
+#define CMD_STAND 'S'
 
-	/** Dealer's name  */
-	#define  DEALER_NAME "Dealer"
+/** Dealer's name  */
+#define  DEALER_NAME "Dealer"
 
-	/**
-   * Simple structure for the BlackJack Game
-   */
-  typedef struct BlackJack {
-  		/** Deck of Cards for Game */
-      Deck* deck;
-      /** Next card (node) in Deck */
-      Player *players[MAX_PLAYERS];
-			int playerStatus[MAX_PLAYERS];
-  } BlackJack;
+/**
+ * Simple structure for the BlackJack Game
+ */
+typedef struct BlackJack {
+	/** Deck of Cards for Game */
+	Deck *deck;
+	/** Number of players (including Dealer) */
+	int num_players;
+	/** Players in the game, including Dealer */
+	Player *players[MAX_PLAYERS+1];
+	/** Status of all Players, including Dealer */
+	int player_status[MAX_PLAYERS+1];
+	/** The current player */
+	int current_player;
+} BlackJack;
 
-	/**
-	* Create the BlackJack Game.
-  * @return Game.
-	*/
-	BlackJack* blackjack_create();
+/**
+ * Create the BlackJack Game.
+ * @param[int] count of players
+ * @return Game.
+ */
+BlackJack* blackjack_create(int count);
 
-	/**
-	* Dispose of the BlackJack Game.
-  * @param Game to dispose of.
-	*/
-	void blackjack_free(BlackJack* game);
+/**
+ * Dispose of the BlackJack Game.
+ * @param[in] Game to dispose of.
+ */
+void blackjack_free(BlackJack *game);
 
-	/**
-	 * Deal a single card to the specified player
-	 * @param player to deal cards to
-	 */
-	void blackjack_deal_card(BlackJack* game, Player* player);
+/**
+ * Deal a single card to the specified player
+ * @param[in] player to deal cards to
+ */
+void blackjack_deal_card(BlackJack *game, Player *player);
 
-	/**
-	 * Deal a specified number of cards to a player
-	 * @param player to deal cards to
-	 * @param cards to deal out
-	 */
-	void blackjack_deal_cards(BlackJack* game, Player* player, int cards);
+/**
+ * Deal a specified number of cards to a player
+ * @param[in] player to deal cards to
+ * @param[in] cards to deal out
+ */
+void blackjack_deal_cards(BlackJack *game, Player *player, int cards);
+
+/**
+ * Setup the game.  Deal initial cards to players.
+ * @param[in] game to start.
+ */
+int blackjack_start(BlackJack* game);
 
 
-
- /** @}*/  /* END addtogroup BlackJack */
+/** @}*//* END addtogroup BlackJack */
 
 #ifdef __cplusplus
 }
