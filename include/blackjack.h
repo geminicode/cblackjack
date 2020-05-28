@@ -5,6 +5,7 @@ extern "C" {
 #endif
 
 #include <stdbool.h>
+#include <wchar.h>
 
 /** \addtogroup Card
  *  @{
@@ -106,7 +107,7 @@ bool card_equals(Card *card, void *obj);
  * String representation of a card.
  * @param [in] card to check
  */
-char* card_tostring(Card *card);
+wchar_t* card_tostring(Card *card);
 
 /** @}*//* END addtogroup Card */
 

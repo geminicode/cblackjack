@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <wctype.h>
+#include <wchar.h>
 #include "blackjack.h"
 
 Card* card_create(enum Suit suit, enum Face face)
@@ -74,8 +75,11 @@ bool card_equals(Card *card, void *obj)
 		card->suit == other->suit);
 }
 
-char* card_tostring(Card *card)
+wchar_t* card_tostring(Card *card)
 {
+	int ARRAY_LENGTH = 10;
+	wchar_t *buffer = malloc( sizeof(wchar_t) * ARRAY_LENGTH);
+	memset(buffer, '\0', sizeof(char) * ARRAY_LENGTH);
 	wchar_t s = 0x2663;
 	switch (card->suit)
 	{
@@ -92,7 +96,10 @@ char* card_tostring(Card *card)
 			break;
 	}
 
-	wprintf("%d%ls", card->value, s);
+	//wprintf("%d%ls", card->value, s);
 
-	return NULL; 
+	swprintf(buffer, ARRAY_LENGTH, L"%d%ls", card->value, s);
+	wprintf(buffer);
+
+	return buffer;
 }
