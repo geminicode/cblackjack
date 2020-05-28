@@ -82,6 +82,5 @@ TEST(CardTest,CardToString){
     Card* card = card_create(Heart, Two);
     wchar_t *buffer = card_tostring(card);
     EXPECT_TRUE(buffer != NULL);
-    fputws(buffer, stdout);
     card_free(card);
 }
