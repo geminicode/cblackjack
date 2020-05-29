@@ -102,10 +102,9 @@ void blackjack_player_status(BlackJack* game, Player* player, int status)
 {
 	for(int i=0; i < game->num_players; i++)
 	{
-		if (strcmp(game->players[i]->name, player->name))
+		if (strcmp(game->players[i]->name, player->name) == 0)
 		{
 			game->player_status[i]=status;
-			//printf("matched player [%s] [%d]", player->name, status);
 			break;
 		}
 	}
