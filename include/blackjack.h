@@ -228,10 +228,13 @@ enum HandStatus {
 // Commands
 /** Quit Key Command  */
 #define CMD_QUIT  'Q'
+#define CMD_QUITL  'q'
 /** Hit Key Command  */
-#define CMD_HIT 'H'
+#define CMD_HIT   'H'
+#define CMD_HITL   'h'
 /** Stand Key Command  */
 #define CMD_STAND 'S'
+#define CMD_STANDL 's'
 
 /** Dealer's name  */
 #define  DEALER_NAME "Dealer"
@@ -283,6 +286,28 @@ void blackjack_deal_cards(BlackJack *game, Player *player, int cards);
  * @param[in] game to start.
  */
 int blackjack_start(BlackJack* game);
+
+/**
+ * Get the current user.
+ * @param[in] game with players.
+ * @return player who is current
+ */
+Player* blackjack_current_player(BlackJack* game);
+
+/**
+ * Get the next user.
+ * @param[in] game with players.
+ * @return player who is next becomes current
+ */
+Player* blackjack_next_player(BlackJack* game);
+
+/**
+ * Update the status of a player
+ * @param[in] game with players to update
+ * @param[in] player to update status
+ * @param[in] status of player
+ */
+void blackjack_player_status(BlackJack* game, Player* player, int status);
 
 
 /** @}*//* END addtogroup BlackJack */

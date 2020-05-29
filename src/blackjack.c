@@ -6,13 +6,6 @@
 
 /******************  PRIVATE FUNCTIONS **************************/
 
-/**
- * Update the status of a player
- * @param[in] game with players to update
- * @param[in] player to update status
- * @param[in] status of player
- */
-void blackjack_player_status(BlackJack* game, Player* player, int status);
 
 
 /****************** END PRIVATE FUNCTIONS ***********************/
@@ -27,6 +20,7 @@ BlackJack* blackjack_create(int count)
 	if (game == NULL)
 		return NULL;
 
+	game->current_player = 0;
 	game->num_players = count +1;
 	game->deck = deck_create();
 
@@ -59,6 +53,17 @@ void blackjack_free(BlackJack* game)
 void blackjack_deal_card(BlackJack* game, Player* player)
 {
 	blackjack_deal_cards(game, player, 1);
+}
+
+Player* blackjack_current_player(BlackJack* game)
+{
+	Player *player = game->players[game->current_player];
+}
+
+Player* blackjack_next_player(BlackJack* game)
+{
+	game->current_player++;
+	return blackjack_current_player(game);
 }
 
 /**
