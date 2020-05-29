@@ -156,12 +156,10 @@ int main(void)
 	wprintf(L"Welcome to BlackJack!.  Let's Play a Game.\n  Five or less Players, NOT including the Dealer.\n");
 
 	int num_players = 3;
-	wchar_t input[2];
 	while(1)
 	{
 		wprintf(L"How many players? ");
 		wscanf(L"%d", &num_players);
-		//num_players = input[0];
 
 		if (num_players == 0)
 		{
