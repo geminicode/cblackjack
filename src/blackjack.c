@@ -58,6 +58,7 @@ void blackjack_deal_card(BlackJack* game, Player* player)
 Player* blackjack_current_player(BlackJack* game)
 {
 	Player *player = game->players[game->current_player];
+	return player;
 }
 
 Player* blackjack_next_player(BlackJack* game)
