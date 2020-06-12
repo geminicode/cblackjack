@@ -310,6 +310,15 @@ Player* blackjack_next_player(BlackJack* game);
 void blackjack_player_status(BlackJack* game, Player* player, int status);
 
 
+/**
+ * Update the status of a player
+ * @param[in] game with players to update
+ * @param[in] cmd to action to
+ * @return false (0) if game is over.
+ */
+int blackjack_command_handler(BlackJack* game, wchar_t cmd);
+
+
 /** @}*//* END addtogroup BlackJack */
 
 #ifdef __cplusplus

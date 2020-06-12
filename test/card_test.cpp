@@ -78,9 +78,48 @@ TEST(CardTest,JackIsANull){
     EXPECT_FALSE(success);
 }
 
-TEST(CardTest,CardToString){
+TEST(CardTest,HeartToString){
     Card* card = card_create(Heart, Two);
     wchar_t *buffer = card_tostring(card);
     EXPECT_TRUE(buffer != NULL);
     card_free(card);
 }
+
+
+TEST(CardTest,DiamondToString){
+    Card* card = card_create(Diamond, Jack);
+    wchar_t *buffer = card_tostring(card);
+    EXPECT_TRUE(buffer != NULL);
+    card_free(card);
+}
+
+TEST(CardTest,ClubToString){
+    Card* card = card_create(Club, Queen);
+    wchar_t *buffer = card_tostring(card);
+    EXPECT_TRUE(buffer != NULL);
+    card_free(card);
+}
+
+TEST(CardTest,SpadeToString){
+    Card* card = card_create(Spade, King);
+    wchar_t *buffer = card_tostring(card);
+    EXPECT_TRUE(buffer != NULL);
+    card_free(card);
+}
+
+TEST(CardTest,AceToString){
+    Card* card = card_create(Spade, Ace);
+    wchar_t *buffer = card_tostring(card);
+    EXPECT_TRUE(buffer != NULL);
+    card_free(card);
+}
+
+TEST(CardTest,SuitIsNull){
+    int suit = card_suit(NULL);
+    EXPECT_EQ(suit, 0);
+ }
+
+TEST(CardTest,FaceIsNull){
+    int face = card_face(NULL);
+    EXPECT_EQ(face, 0);
+ }
